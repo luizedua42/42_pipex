@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:35:24 by luizedua          #+#    #+#             */
-/*   Updated: 2023/07/25 20:24:40 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/07/27 20:26:18 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	main(int argc, char *argv[], char **envp)
 
 	if (argc == 5)
 	{
-		if ((ppx.flfd[0] = open(argv[1], O_RDONLY)) == -1)
+		ppx.flfd[0] = open(argv[1], O_RDONLY);
+		if (ppx.flfd[0])
 			ft_putstr_fd("file1 does not exit", 2);
 		ppx.flfd[1] = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (pipe(ppx.pipefd) == -1)
