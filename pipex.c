@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:35:24 by luizedua          #+#    #+#             */
-/*   Updated: 2023/07/27 20:26:18 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/05 12:10:29 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	child_process_one(int *flfd, int *pipefd, t_pipex *pipex)
 	dup2(pipefd[1], 1);
 	close_fds(pipex);
 	execve(pipex->fcmd, pipex->param1, pipex->ambient);
-	ft_putstr_fd("execve 1 error", 2);
+	ft_putstr_fd("execve 1 error\n", 2);
+	ft_free((void **)pipex->param2);
+	ft_free((void **)pipex->param1);
+	free (pipex->fcmd);
+	free (pipex->scmd);
 	exit(0);
 }
 
@@ -37,7 +41,7 @@ void	child_process_two(int *flfd, int *pipefd, t_pipex *pipex)
 	dup2(flfd[1], 1);
 	close_fds(pipex);
 	execve(pipex->scmd, pipex->param2, pipex->ambient);
-	ft_putstr_fd("execve 2 error", 2);
+	ft_putstr_fd("execve 2 error\n", 2);
 	exit(0);
 }
 
@@ -63,12 +67,11 @@ int	main(int argc, char *argv[], char **envp)
 
 	if (argc == 5)
 	{
-		ppx.flfd[0] = open(argv[1], O_RDONLY);
-		if (ppx.flfd[0])
+		if ((ppx.flfd[0] = open(argv[1], O_RDONLY)) == -1)
 			ft_putstr_fd("file1 does not exit", 2);
 		ppx.flfd[1] = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (pipe(ppx.pipefd) == -1)
-			ft_putstr_fd("pipe: ", 2);
+			ft_putstr_fd("pipe error", 2);
 		ppx.param1 = split_flags(argv[2]);
 		ppx.param2 = split_flags(argv[3]);
 		cmd1 = get_command(ppx.param1[0], envp, &ppx);

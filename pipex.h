@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:16:04 by luizedua          #+#    #+#             */
-/*   Updated: 2023/07/27 20:24:19 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:05:49 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void		ft_free(void **matrix1);
 void		child_process_two(int *flfd, int *pipefd, t_pipex *pipex);
 void		child_process_one(int *flfd, int *pipefd, t_pipex *pipex);
 void		make_it_work(char *cmd1, char *cmd2, char **env, t_pipex *ppx);
+
 
 #endif
