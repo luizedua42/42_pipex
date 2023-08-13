@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:35:24 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/13 18:11:16 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/13 20:06:44 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ void	child_process_one(int *flfd, int *pipefd, t_pipex *pipex)
 	if (pipex->scmd == NULL)
 	{
 		ft_putstr_fd("command not found\n", 2);
+		ft_free((void **)pipex->param1);
+		ft_free((void **)pipex->param2);
+		free(pipex->fcmd);
+		free(pipex->scmd);
 		exit(0);
 	}
 	execve(pipex->fcmd, pipex->param1, pipex->ambient);
 	ft_putstr_fd("execve error\n", 2);
-	ft_free((void **)pipex->param2);
 	ft_free((void **)pipex->param1);
+	ft_free((void **)pipex->param2);
 	free(pipex->fcmd);
 	free(pipex->scmd);
 	exit(0);
