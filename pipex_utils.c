@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:54:49 by luizedua          #+#    #+#             */
-/*   Updated: 2023/07/27 19:33:38 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/13 00:14:19 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*get_command(char *command, char **ev, t_pipex *pipex)
 
 	i = 0;
 	if (command[0] == '/' || command[0] == '.')
-		return(ft_strdup(command));
+		return (ft_strdup(command));
 	pipex->paths = get_path(ev);
 	while (pipex->paths[i] != NULL)
 	{

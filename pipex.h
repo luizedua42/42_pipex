@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:16:04 by luizedua          #+#    #+#             */
-/*   Updated: 2023/07/24 18:05:49 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/13 00:10:07 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <stdio.h>
 
 //little structy
 typedef struct s_pipex
@@ -35,7 +34,6 @@ typedef struct s_pipex
 }			t_pipex;
 
 //funcs
-
 void		pipex(char *s1, char *s2, char **e1, t_pipex *pip);
 char		**get_path(char **envp);
 char		**split_flags(char *str);
@@ -44,6 +42,5 @@ void		ft_free(void **matrix1);
 void		child_process_two(int *flfd, int *pipefd, t_pipex *pipex);
 void		child_process_one(int *flfd, int *pipefd, t_pipex *pipex);
 void		make_it_work(char *cmd1, char *cmd2, char **env, t_pipex *ppx);
-
 
 #endif
