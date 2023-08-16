@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:35:24 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/16 14:00:32 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:08:04 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	main(int argc, char *argv[], char **envp)
 	ppx.flfd[1] = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (pipe(ppx.pipefd) == -1)
 		ft_putstr_fd("pipe error", 2);
-	ppx.param1 = split_flags(argv[2]);
-	ppx.param2 = split_flags(argv[3]);
+	ppx.param1 = ft_split(argv[2], ' ');
+	ppx.param2 = ft_split(argv[3], ' ');
 	cmd1 = get_command(ppx.param1[0], envp, &ppx);
 	cmd2 = get_command(ppx.param2[0], envp, &ppx);
 	make_it_work(cmd1, cmd2, envp, &ppx);

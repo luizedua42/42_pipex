@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:16:04 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/15 14:03:41 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:08:15 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_pipex
 char		**get_path(char **envp);
 void		ft_free(void **matrix1);
 void		close_fds(t_pipex *ppx);
-char		**split_flags(char *str);
 void		pipex(char *s1, char *s2, char **e1, t_pipex *pip);
 char		*get_command(char *command, char **ev, t_pipex *pipex);
 void		child_process_two(int *flfd, int *pipefd, t_pipex *pipex);

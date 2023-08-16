@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:54:49 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/15 14:02:35 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:16:23 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_command(char *command, char **ev, t_pipex *pipex)
 	{
 		tmp = ft_strjoin(pipex->paths[i], "/");
 		cmd = ft_strjoin(tmp, command);
-		free(tmp); 
+		free(tmp);
 		if (!access(cmd, F_OK) && !access(cmd, X_OK))
 		{
 			ft_free((void **)pipex->paths);
@@ -58,12 +58,19 @@ char	*get_command(char *command, char **ev, t_pipex *pipex)
 	return (NULL);
 }
 
-char	**split_flags(char *str)
+int	second_child(char *cmd2, int *pid, t_pipex *ppx)
 {
-	char	**cmd_param;
-
-	cmd_param = ft_split(str, ' ');
-	return (cmd_param);
+	if (cmd2 == NULL)
+	{
+		ft_putstr_fd("command not found\n", 2);
+		return (1);
+	}
+	pid[1] = fork();
+	if (pid[1] < 0)
+		ft_putstr_fd("error fork 2\n", 2);
+	if (pid[1] == 0)
+		child_process_two(ppx->flfd, ppx->pipefd, ppx);
+	return (0);
 }
 
 void	make_it_work(char *cmd1, char *cmd2, char **env, t_pipex *ppx)
@@ -81,16 +88,10 @@ void	make_it_work(char *cmd1, char *cmd2, char **env, t_pipex *ppx)
 	}
 	else
 		ft_putstr_fd("command not found\n", 2);
-	if(cmd2 != NULL)
-	{
-		pid[1] = fork();
-		if (pid[1] < 0)
-			ft_putstr_fd("error fork 2\n", 2);
-		if (pid[1] == 0)
-			child_process_two(ppx->flfd, ppx->pipefd, ppx);
-	}
-	else
-		ft_putstr_fd("command not found\n", 2);
+	if (!cmd1)
+		close(ppx->pipefd[1]);
+	if (second_child(cmd2, pid, ppx))
+		return ;
 	wait(NULL);
 	close_fds(ppx);
 }
