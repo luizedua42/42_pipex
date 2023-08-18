@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:54:49 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/16 15:16:23 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:13:44 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	second_child(char *cmd2, int *pid, t_pipex *ppx)
 	if (cmd2 == NULL)
 	{
 		ft_putstr_fd("command not found\n", 2);
+		close_fds(ppx);
 		return (1);
 	}
 	pid[1] = fork();
