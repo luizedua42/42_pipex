@@ -6,7 +6,7 @@
 /*   By: luizedua <luizedua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:54:49 by luizedua          #+#    #+#             */
-/*   Updated: 2023/08/17 21:13:44 by luizedua         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:09:17 by luizedua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ void	make_it_work(char *cmd1, char *cmd2, char **env, t_pipex *ppx)
 	if (!cmd1)
 		close(ppx->pipefd[1]);
 	if (second_child(cmd2, pid, ppx))
+	{
+		close_fds(ppx);
 		return ;
+	}
 	wait(NULL);
 	close_fds(ppx);
 }
