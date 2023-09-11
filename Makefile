@@ -1,13 +1,8 @@
 NAME = pipex
-# NAMEBONUS = pipex_bonus
 CC = cc
 CCFLAGS = -g3 -Wall -Werror -Wextra
 
 OBJ = $(SRC:%.c=%.o)
-
-# BOBJ = $(BSRC:%.c=%.o)
-
-#BSRC =
 
 SRC = pipex.c pipex_utils.c
 
@@ -15,8 +10,7 @@ SRC = pipex.c pipex_utils.c
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $<
 
-
-all: $(NAME) 
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/ --no-print-directory
@@ -25,8 +19,8 @@ $(NAME): $(OBJ)
 bonus: $(NAMEBONUS)
 
 clean:
-	rm -f $(OBJ)
 	make -C libft/ clean --no-print-directory
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
